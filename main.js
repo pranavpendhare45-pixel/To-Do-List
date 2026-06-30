@@ -1,13 +1,25 @@
 let input = document.querySelector("#task-input");
 let add = document.querySelector("#add-button");
+let appDiv = document.querySelector(".app");
 
-add.addEventListener("click", function () {
+let tasks = []; 
 
-    if(input.value===""){
-        alert("Enter the task");
-    }
-  
-  if (input.value.trim() === "") return;
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasks() {
+  let stored = localStorage.getItem("tasks");
+  if (stored) {
+    tasks = JSON.parse(stored);
+    tasks.forEach(function (taskObj) {
+      renderTask(taskObj);
+    });
+  }
+}
+
+
+function renderTask(taskObj) {
   let div = document.createElement("div");
   div.classList.add("task");
 
@@ -16,11 +28,18 @@ add.addEventListener("click", function () {
 
   let checkBox = document.createElement("input");
   checkBox.type = "checkbox";
-  let span = document.createElement("span");
-  span.innerText = input.value;
+  checkBox.checked = taskObj.completed;
 
-  checkBox.addEventListener("click", function () {
+  let span = document.createElement("span");
+  span.innerText = taskObj.text;
+  if (taskObj.completed) {
     span.style.textDecoration = "line-through";
+  }
+
+  checkBox.addEventListener("change", function () {
+    span.style.textDecoration = checkBox.checked ? "line-through" : "none";
+    taskObj.completed = checkBox.checked;
+    saveTasks();
   });
 
   let del = document.createElement("button");
@@ -29,13 +48,39 @@ add.addEventListener("click", function () {
 
   del.addEventListener("click", function () {
     div.remove();
+    tasks = tasks.filter(function (t) {
+      return t !== taskObj;
+    });
+    saveTasks();
   });
 
   taskDiv.appendChild(checkBox);
   taskDiv.appendChild(span);
   div.appendChild(taskDiv);
   div.appendChild(del);
-  document.querySelector(".app").appendChild(div);
+  appDiv.appendChild(div);
+}
+
+
+function addTask() {
+  if (input.value.trim() === "") {
+    alert("Enter the task");
+    return;
+  }
+
+  let taskObj = { text: input.value.trim(), completed: false };
+  tasks.push(taskObj);
+  renderTask(taskObj);
+  saveTasks();
 
   input.value = "";
+  input.focus();
+}
+
+add.addEventListener("click", addTask);
+
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") addTask();
 });
+
+loadTasks();
