@@ -9,6 +9,7 @@ This is my first project that i make.
 Add new tasks
 Delete tasks
 Mark tasks as completed
+Add task in local storage
 
 
 🛠️ Tech Stack:-
@@ -20,10 +21,6 @@ JavaScript
 Download or clone the repository
 Open index.html in your browser
 
-📌 Future Improvements:-
-Add local storage (save tasks permanently)
-Add edit task feature
-Improve UI/UX
 
 👨‍💻 Author:-
 Pranav Pendhare
