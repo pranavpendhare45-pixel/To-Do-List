@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.app {
+  width: 500px;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#task-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  outline: none;
+}
+
+#task-input:focus {
+  border-color: #007bff;
+}
+
+#add-button {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #fff;
+  margin-top: 10px;
+  border-radius: 5px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.left span {
+  word-break: break-word;
+  min-width: 0;
+}
+.delete {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+h1 {
+  text-align: center;
+}
